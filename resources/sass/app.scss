@@ -1,0 +1,20 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+body {
+    background: #dbd6d6;
+}
+.main {
+    margin-top: 55px;
+}
+
+.newsBlock {
+    background: #a8a1a1;
+    display: inline-block;
+}
