@@ -15,7 +15,7 @@ Route::get('/info', [InfoController::class, 'index'])->name('info');
 
 Route::group(["prefix" => "news"], function (){
     Route::get('/', [NewsController::class, 'index'])->name('news');
-    Route::get('/{id}', [NewsController::class, 'oneNews'])->name('news_id');
+    Route::get('/{id}', [NewsController::class, 'oneNews'])->name('news.id');
 });
 
 

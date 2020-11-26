@@ -17,7 +17,7 @@
                 <a class="nav-link" href="{{ route('news') }}">Новости</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('category') }}">Категории</a>
+                <a class="nav-link" href="{{ route('home') }}">Войти</a>
             </li>
         </ul>
         <form class="form-inline mt-2 mt-md-0">
