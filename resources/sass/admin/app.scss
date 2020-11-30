@@ -1,0 +1,40 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+//@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+body {
+    background: #dbd6d6;
+}
+
+.content{
+    min-height: calc(100vh - 118px);
+}
+.main {
+}
+.jumbotron {
+    margin-bottom: 0;
+}
+
+.newsBlock {
+    background: #a8a1a1;
+    display: inline-block;
+}
+
+.margin {
+    margin-top: 60px;
+}
+
+// footer
+.footer {
+    padding: 20px;
+    background: #343a40;
+}
+
+.height {
+    height: 100px;
+}

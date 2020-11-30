@@ -37537,9 +37537,7 @@ var staticRenderFns = [
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "card-body" }, [
-              _vm._v(
-                "\n                    I'm an example component.\n                "
-              )
+              _vm._v("\n                    VUE работает!\n                ")
             ])
           ])
         ])
@@ -49867,6 +49865,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/sass/admin/app.scss":
+/*!***************************************!*\
+  !*** ./resources/sass/admin/app.scss ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "./resources/sass/app.scss":
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
@@ -49879,14 +49888,15 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 0:
-/*!*************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ***!
-  \*************************************************************/
+/*!*********************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/admin/app.scss ***!
+  \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! /Users/Gesha/Desktop/www/code/geek-laravel8/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/Gesha/Desktop/www/code/geek-laravel8/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/Gesha/Desktop/www/code/geek-laravel8/resources/sass/app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! /Users/Gesha/Desktop/www/code/geek-laravel8/resources/sass/admin/app.scss */"./resources/sass/admin/app.scss");
 
 
 /***/ })

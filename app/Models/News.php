@@ -6,47 +6,47 @@ namespace App\Models;
 
 class News
 {
-    const NEWS = [
-        [
-            'id' => '0',
-            'category_id' => '2',
-            'title' => 'Образование',
-            'description' => 'очень интересная новость!'
-        ],
-        [
-            'id' => '1',
-            'category_id' => '3',
-            'title' => 'Отдых',
-            'description' => 'очень интересная новость!'
-        ],
-        [
-            'id' => '2',
-            'category_id' => '1',
-            'title' => 'Спорт',
-            'description' => 'очень интересная новость!'
-        ],
-        [
-            'id' => '3',
-            'category_id' => '4',
-            'title' => 'Пандемия',
-            'description' => 'очень интересная новость!'
-        ],
-        [
-            'id' => '4',
-            'category_id' => '0',
-            'title' => 'Политика',
-            'description' => 'очень интересная новость!'
-        ],
-        [
-            'id' => '5',
-            'category_id' => '1',
-            'title' => 'Спорт 2',
-            'description' => 'очень интересная новость!'
-        ]
-    ];
+    static public $news = [];
 
     public static function getNews () {
-        return self::NEWS;
+
+        $json = file_get_contents("./news.json");
+        self::$news = json_decode($json, true);
+        return self::$news;
+    }
+    public static function addNews ($array){
+        $json = file_get_contents("./news.json");
+        self::$news = json_decode($json, true);
+
+        if (isset($array['isPrivate'])){
+            $isPrivate = true;
+        } else {
+            $isPrivate = false;
+        }
+        $id = self::getId() + 1;
+        $arr = [
+            'id' => $id,
+            'category_id' => $array['categories'],
+            'isPrivate' => $isPrivate,
+            'title' => $array['title'],
+            'description' => $array['description']
+        ];
+
+        self::$news['news'][$id] = $arr;
+        file_put_contents('./news.json', json_encode(self::$news));
+        return self::$news;
     }
 
+    public static function getId () {
+        return array_key_last(self::$news['news']);
+    }
+
+    public static function delete ($id){
+        $json = file_get_contents("./news.json");
+        self::$news = json_decode($json, true);
+
+        unset(self::$news['news'][$id]);
+        file_put_contents('./news.json', json_encode(self::$news));
+        return self::$news;
+    }
 }

@@ -10,7 +10,7 @@ class IndexController extends Controller
 
     public function index () {
         $category = CATEGORY::getCategory();
-        return view('home',[
+        return view('index',[
             'newsCategory' => $category
         ]);
     }

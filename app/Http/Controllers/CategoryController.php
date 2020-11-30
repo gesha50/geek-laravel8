@@ -9,19 +9,10 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    //реализация калькулятора
-    protected $calc;
-
-    public function __construct()
-    {
-        //реализация калькулятора
-        $this->calc = Calc::createCalc();
-    }
 
     public function getCategory() {
         //реализация калькулятора
-        $res = $this->calc->add(5)->sub(1)->getResult();
-//        dd($res);
+//        $res = $this->calc->add(5)->sub(1)->getResult();
         $category = CATEGORY::getCategory();
         return view('category',[
             'newsCategory' => $category
@@ -30,10 +21,11 @@ class CategoryController extends Controller
 
     public function getOneCategory ($id) {
         $category = CATEGORY::getCategory();
-        $allNews = News::getNews();
-        for ($i=0; $i<count($allNews);$i++){
-            if($allNews[$i]['category_id'] == $id){
-                $oneCategory[] = $allNews[$i];
+        $allNews = News::getNews()['news'];
+        $oneCategory = [];
+        foreach ($allNews as $news){
+            if($news['category_id'] == $id){
+                $oneCategory[] = $news;
             }
         }
         return view('newsOneCategory',[
