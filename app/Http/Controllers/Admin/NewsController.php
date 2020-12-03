@@ -22,9 +22,12 @@ class NewsController extends Controller
     }
 
     public function oneNews ($id) {
-        $oneNews = News::getNews();
+        $oneNews = News::getNewsById($id);
+//        if ($oneNews = null) {
+//            abort(404);
+//        }
         return view('admin.oneNews',[
-            //'oneNews' => $oneNews[$id],
+            'oneNews' => $oneNews,
             'newsCategory' => CATEGORY::getCategory(),
             'isAdmin' => true
         ]);
@@ -33,15 +36,19 @@ class NewsController extends Controller
     public function add (Request $request) {
 
         if ($request->method() == 'POST'){
+            $img = 'http://dummyimage.com/250';
             if ($request->hasFile('image')){
-                Storage::disk('public')->putFile('', $request->file('image'));
+                $path = Storage::putFile('public', $request->file('image'));
+                $img = Storage::url($path);
             }
-            News::addNews($request->only('title', 'description', 'isPrivate', 'categories'));
+
+            News::addNews($request->only('title', 'description', 'is_private', 'categories', 'spoiler'), $img);
 //            $request->flash();
             return redirect(route('admin.news.allNews'));
         } else {
+            $arr = CATEGORY::getCategory();
             return view('admin.add',[
-                'newsCategory' => CATEGORY::getCategory(),
+                'newsCategory' => $arr,
                 'isAdmin' => true
             ]);
         }
