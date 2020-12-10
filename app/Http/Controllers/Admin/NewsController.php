@@ -1,62 +1,120 @@
 <?php
 
-
 namespace App\Http\Controllers\Admin;
 
-
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateNewsRequest;
 use App\Models\Category;
 use App\Models\News;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class NewsController extends Controller
 {
-
-    public function allNews () {
-        return view('admin.allNews',[
-            'news' => News::getNews(),
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        return view('admin.allNews', [
+            'news' => News::orderByDesc('id')->paginate(4),
             'newsCategory' => CATEGORY::getCategory(),
             'isAdmin' => true
         ]);
     }
 
-    public function oneNews ($id) {
-        $oneNews = News::getNewsById($id);
-//        if ($oneNews = null) {
-//            abort(404);
-//        }
-        return view('admin.oneNews',[
-            'oneNews' => $oneNews,
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('admin.add', [
             'newsCategory' => CATEGORY::getCategory(),
             'isAdmin' => true
         ]);
+
     }
 
-    public function add (Request $request) {
-
-        if ($request->method() == 'POST'){
-            $img = 'http://dummyimage.com/250';
-            if ($request->hasFile('image')){
-                $path = Storage::putFile('public', $request->file('image'));
-                $img = Storage::url($path);
-            }
-
-            News::addNews($request->only('title', 'description', 'is_private', 'categories', 'spoiler'), $img);
-//            $request->flash();
-            return redirect(route('admin.news.allNews'));
-        } else {
-            $arr = CATEGORY::getCategory();
-            return view('admin.add',[
-                'newsCategory' => $arr,
-                'isAdmin' => true
-            ]);
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $news = News::create($request->all());
+        if ($request->hasFile('image')) {
+            $path = \Storage::putFile('public', $request->file('image'));
+            $news->image = \Storage::url($path);
+            $news->save();
         }
+        $request->flash();
+        return redirect(route('admin.news.index'));
     }
 
-    public function delete ($id) {
-        News::delete($id);
-        return redirect(route('admin.news.allNews'));
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\News  $news
+     * @return \Illuminate\Http\Response
+     */
+    public function show(News $news)
+    {
+        return view('admin.oneNews', [
+            'oneNews' => $news,
+            'newsCategory' => CATEGORY::getCategory(),
+            'isAdmin' => true
+        ]);
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\News  $news
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(News $news)
+    {
+        return view('admin.edit', [
+            'newsCategory' => CATEGORY::getCategory(),
+            'isAdmin' => true,
+            'news' => $news
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\News  $news
+     * @return \Illuminate\Http\Response
+     */
+    public function update(UpdateNewsRequest $request, News $news)
+    {
+
+        $news->update($request->all());
+        $request->flash();
+        if ($request->hasFile('image')) {
+            $path = \Storage::putFile('public', $request->file('image'));
+            $news->image = \Storage::url($path);
+            $news->save();
+        }
+        return redirect(route('admin.news.index'));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\News  $news
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(News $news)
+    {
+        $news->delete();
+        return redirect(route('admin.news.index'))->with('warning', 'Новость успешно удалена');
+    }
 }

@@ -23,9 +23,13 @@ class CategoryController extends Controller
 
     public function getOneCategory ($id) {
         $category = CATEGORY::getCategory();
-        $oneCategory = CATEGORY::getOneCategory($id);
+
+        $news = News::query()->whereHas('category', function ($query) use ($id){
+            $query->where('category_id', $id);
+        })->get();
+
         return view('newsOneCategory',[
-            'oneCategory' => $oneCategory,
+            'oneCategory' => $news,
             'newsCategory' => $category
         ]);
     }

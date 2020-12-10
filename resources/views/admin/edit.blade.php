@@ -3,21 +3,23 @@
 @section('title')Админка@endsection
 
 @section('content')
-    <h1>Добавить Новость</h1>
+    <h1>Редактировать Новость</h1>
     <div class="container">
         <div class="row">
-            <div class="col">
 
-            </div>
-            <div class="col">
-                <form method="POST" action="{{ route('admin.news.store') }}" enctype="multipart/form-data">
+            <div class="col-6 ">
+                <div class="card">
+                    <div class="card-body">
+                <form method="POST" action="{{ route('admin.news.update', $news) }}" enctype="multipart/form-data">
+                    @method('PATCH')
                     @csrf
+
                     <div class="form-group">
                         <label for="formGroupExampleInput">Заголовок</label>
-                        <input name="title" type="text"
+                        <input name="title" type="text" dusk="title"
                                class="form-control @error('title') is-invalid @enderror"
                                id="formGroupExampleInput"
-                               placeholder="Хоккоей ЧМ-2020" value="{{ old('title') }}">
+                               value="{{ old('title' , $news->title) }}">
                     </div>
                     @foreach($errors->get('title') as $error)
                         <div class="text-danger">{{ $error }}</div>
@@ -25,10 +27,10 @@
 
                     <div class="form-group">
                         <label for="formGroupExampleInput1">Короткое описание</label>
-                        <input name="spoiler" type="text"
+                        <input name="spoiler" type="text" dusk="spoiler"
                                class="form-control spoiler_height @error('spoiler') is-invalid @enderror"
                                id="formGroupExampleInput1"
-                               placeholder="Победа команды в Кубке Гагарина..." value="{{ old('spoiler') }}">
+                               value="{{ old('spoiler' , $news->spoiler) }}">
                     </div>
                     @foreach($errors->get('spoiler') as $error)
                         <div class="text-danger">{{ $error }}</div>
@@ -36,41 +38,43 @@
 
                     <div class="form-group">
                         <label for="formGroupExampleInput2">Текст Новости</label>
-                        <input name="description" type="text"
+                        <input name="description" type="text" dusk="description"
                                class="form-control height @error('description') is-invalid @enderror"
                                id="formGroupExampleInput2"
-                               placeholder="Длинное описание..." value="{{ old('description') }}">
+                               value="{{ old('description' , $news->description) }}">
                     </div>
                     @foreach($errors->get('description') as $error)
                         <div class="text-danger">{{ $error }}</div>
                     @endforeach
-
                     <label for="formSelectCategories">Выберите категорию:</label>
                     <select id="formSelectCategories" name="category_id" class="form-control">
                         @foreach($newsCategory as $category)
-                            <option value="{{ $category->id }}" @if(old('category_id') == $category->id) selected @endif >{{  $category->title }}</option>
+                            <option value="{{ $category->id }}" @if(old('category_id', $news->category_id) == $category->id) selected @endif >{{  $category->title }}</option>
                         @endforeach
                     </select>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="is_private" id="exampleRadios1" value="1">
+                        <input class="form-check-input" type="radio"
+                               name="is_private" id="exampleRadios1" value="1"
+                               @if(old('is_private', $news->is_private) == true) checked @endif>
                         <label class="form-check-label" for="exampleRadios1">Приватная</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="is_private" id="exampleRadios1" value="0" checked>
+                        <input class="form-check-input" type="radio"
+                               name="is_private" id="exampleRadios1" value="0"
+                               @if(old('is_private', $news->is_private) == false) checked @endif>
                         <label class="form-check-label" for="exampleRadios1">Публичная</label>
                     </div>
-                    {{--                    <div class="custom-control custom-switch m-2">--}}
-                    {{--                        <input name="is_private" type="radio" class="custom-control-input" id="customSwitch1">--}}
-                    {{--                        <label class="custom-control-label" for="customSwitch1">Приватная ли новость?</label>--}}
-                    {{--                    </div>--}}
+
                     <input type="file" class="form-control-file m-2"
                            id="exampleFormControlFile1" name="image"
-                           accept="image/*" >
-                    <button type="submit" class="btn btn-success">Добавить новость</button>
+                           accept="image/*" value="/storage/4TQOnbJIAvokPHs63oA9LL0TKK4QKUJ2cc6Rq6Yu.jpeg}">
+                    <img class="m-2" width="200px" src="{{old('image', $news->image) }}" alt="">
+                    <button dusk="submit" type="submit" class="btn btn-success">Внести изменения</button>
                 </form>
+                </div>
+                </div>
             </div>
             <div class="col">
-
             </div>
         </div>
     </div>

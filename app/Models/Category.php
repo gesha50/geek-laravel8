@@ -3,9 +3,12 @@
 
 namespace App\Models;
 use DB;
+use Illuminate\Database\Eloquent\Model;
 
-class Category
+class Category extends Model
 {
+    protected $table = 'categories';
+
     public static function getCategory () {
         return DB::select('SELECT * FROM categories');
     }
@@ -15,6 +18,10 @@ class Category
             ->where('category_id', '=', $id)
             ->get();
         return $news;
+    }
+
+    public static function getMaxId () {
+        return DB::table('categories')->max('id');
     }
 
 }

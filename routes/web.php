@@ -10,13 +10,14 @@ use App\Http\Controllers\CategoryController;
 
 Route::group(["prefix" => "/admin", "as" => "admin."], function (){
 
-    Route::group(["prefix" => "news", "as" => "news."], function (){
-        Route::get('/', [App\Http\Controllers\Admin\NewsController::class, 'allNews'])->name('allNews');
-        Route::get('/{id}', [App\Http\Controllers\Admin\NewsController::class, 'oneNews'])->name('id')->where('id', '[0-9]+');
-        Route::get('/delete/{id}', [App\Http\Controllers\Admin\NewsController::class, 'delete'])->name('delete')->where('id', '[0-9]+');
-        Route::match(['get', 'post'],'/add', [App\Http\Controllers\Admin\NewsController::class, 'add'])->name('add');
-
-    });
+//    Route::group(["prefix" => "news", "as" => "news."], function (){
+//        Route::get('/', [App\Http\Controllers\Admin\NewsController::class, 'allNews'])->name('allNews');
+//        Route::get('/{id}', [App\Http\Controllers\Admin\NewsController::class, 'oneNews'])->name('id')->where('id', '[0-9]+');
+//        Route::get('/delete/{id}', [App\Http\Controllers\Admin\NewsController::class, 'delete'])->name('delete')->where('id', '[0-9]+');
+//        Route::match(['get', 'post'],'/add', [App\Http\Controllers\Admin\NewsController::class, 'add'])->name('add');
+//
+//    });
+    Route::resource('news', 'App\Http\Controllers\Admin\NewsController');
 
     Route::get('/', [App\Http\Controllers\Admin\IndexController::class, 'index'])->name('index');
 });
