@@ -11,19 +11,19 @@ class NewsController extends Controller
 
     public function index () {
         return view('news',[
-            'news' => News::paginate(4),
-            'newsCategory' => CATEGORY::getCategory()
+            'news' => News::where('is_private', 0)->paginate(4),
+            'newsCategory' => CATEGORY::all()
         ]);
     }
 
     public function oneNews ($id) {
-        $oneNews = News::getNewsById($id);
+        $oneNews = News::where('id', $id)->first();
         if (empty($oneNews)) {
             abort(404);
         }
         return view('oneNews',[
             'oneNews' => $oneNews,
-            'newsCategory' => CATEGORY::getCategory()
+            'newsCategory' => CATEGORY::all()
         ]);
     }
 }

@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             NewsSeeder::class,
             CategoriesSeeder::class,
+            RoleSeeder::class,
+            ResourcesSeeder::class
         ]);
         // \App\Models\User::factory(10)->create();
     }

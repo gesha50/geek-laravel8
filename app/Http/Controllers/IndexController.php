@@ -9,9 +9,14 @@ class IndexController extends Controller
 {
 
     public function index () {
-        $category = CATEGORY::getCategory();
-        return view('index',[
-            'newsCategory' => $category
+        return view('home',[
+            'newsCategory' => Category::all()
+        ]);
+    }
+
+    public function privacy () {
+        return view('privacy',[
+            'newsCategory' => Category::all()
         ]);
     }
 }

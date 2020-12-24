@@ -11,8 +11,7 @@ class IndexController extends Controller
 {
     public function index () {
         return view('admin.index',[
-            'newsCategory' => CATEGORY::getCategory(),
-            'isAdmin' => true
+            'newsCategory' => Category::all(),
         ]);
     }
 }

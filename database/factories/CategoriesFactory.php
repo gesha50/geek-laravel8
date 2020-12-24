@@ -1,14 +1,27 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
+
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 use App\Models\Category;
+use App\Models\News;
 use Faker\Generator as Faker;
+use Illuminate\Support\Str;
 
-$factory->define(Category::class, function (Faker $faker) {
-    return [
-        'id' => 1,
-        'title' => 'Спорт',
-        'slug' => 'sport',
-    ];
-});
+class CategoriesFactory extends Factory
+{
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'id' => 1,
+            'title' => 'Спорт',
+            'slug' => 'sport',
+        ];
+    }
+}

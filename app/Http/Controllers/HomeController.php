@@ -24,9 +24,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $category = CATEGORY::getCategory();
         return view('home', [
-            'newsCategory' => $category
+            'newsCategory' => Category::all()
         ]);
     }
 }

@@ -19,8 +19,7 @@ class NewsController extends Controller
     {
         return view('admin.allNews', [
             'news' => News::orderByDesc('id')->paginate(4),
-            'newsCategory' => CATEGORY::getCategory(),
-            'isAdmin' => true
+            'newsCategory' => Category::all(),
         ]);
     }
 
@@ -32,8 +31,7 @@ class NewsController extends Controller
     public function create()
     {
         return view('admin.add', [
-            'newsCategory' => CATEGORY::getCategory(),
-            'isAdmin' => true
+            'newsCategory' => Category::all(),
         ]);
 
     }
@@ -66,8 +64,7 @@ class NewsController extends Controller
     {
         return view('admin.oneNews', [
             'oneNews' => $news,
-            'newsCategory' => CATEGORY::getCategory(),
-            'isAdmin' => true
+            'newsCategory' => CATEGORY::all(),
         ]);
     }
 
@@ -80,8 +77,7 @@ class NewsController extends Controller
     public function edit(News $news)
     {
         return view('admin.edit', [
-            'newsCategory' => CATEGORY::getCategory(),
-            'isAdmin' => true,
+            'newsCategory' => CATEGORY::all(),
             'news' => $news
         ]);
     }
@@ -93,7 +89,10 @@ class NewsController extends Controller
      * @param  \App\Models\News  $news
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateNewsRequest $request, News $news)
+    // можно использовать класс Request: UpdateNewsRequest
+    //для проверки правил
+    // В данном случае используется middleware    NewsValidate
+    public function update(Request $request, News $news)
     {
 
         $news->update($request->all());

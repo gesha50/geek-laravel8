@@ -3,15 +3,22 @@
 
 namespace App\Models;
 use DB;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    protected $table = 'categories';
+    use HasFactory;
 
-    public static function getCategory () {
-        return DB::select('SELECT * FROM categories');
-    }
+    protected $table = 'categories';
+    /**
+     * @var mixed
+     */
+    private $id;
+    /**
+     * @var mixed
+     */
+    private $title;
 
     public static function getOneCategory($id) {
         $news = DB::table('news')
