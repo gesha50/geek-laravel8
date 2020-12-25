@@ -65,9 +65,9 @@ Route::get('/calc', 'BaseWithCalcController@index');
 
 
 // для файлового менеджера
-//Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth', 'role:admin ']], function () {
-//    \UniSharp\LaravelFilemanager\Lfm::routes();
-//});
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth', 'role:admin ']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
 
 
 

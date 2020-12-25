@@ -21,16 +21,16 @@ class NewsParser implements NewsParserInterface
         $isCategoryInDB = $this->checkCategoryInDB($category);
 
         if (!$isCategoryInDB){
-            DB::table('category')->insert(['title' => $category, 'slug' => Str::slug($category)]);
+            DB::table('categories')->insert(['title' => $category, 'slug' => Str::slug($category)]);
         }
 
-        $categoryID = DB::table('category')->where('title', $category)->first('id');
+        $categoryID = DB::table('categories')->where('title', $category)->first('id');
 
         $this->checkOrAddNewsInDB($data,$categoryID);
     }
 
     public function checkCategoryInDB ($category) {
-        $categoryInDB = DB::table('category')->pluck('title');
+        $categoryInDB = DB::table('categories')->pluck('title');
         foreach ($categoryInDB as $oneCategoryInDB) {
             if ($oneCategoryInDB == $category){
                 return true;
