@@ -4,6 +4,8 @@
 
 @section('content')
     <h1>Информация</h1>
+    <example-component></example-component>
+    <img src="{{ asset('storage/NlTnndAuUWxPzJ5mDCE9gjZTmfctaN73VwxdvUEO.jpeg') }}" alt="">
 @endsection
 
 

@@ -11,7 +11,7 @@
 <body>
 <div id="app">
     <div class="container-fluid jumbotron content">
-        @include('inc.header')
+        @include('admin.inc.header')
         <div class="main">
             <div class="row">
                 <div class="col-md-2">
@@ -30,8 +30,9 @@
             </div>
         </div>
     </div>
-    @include('inc.footer')
+    @include('admin.inc.footer')
 </div>
 <script src="{{ asset('js/app.js') }}"></script>
+@stack('js')
 </body>
 </html>

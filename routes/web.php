@@ -16,8 +16,12 @@ Route::group(["prefix" => "/admin", "as" => "admin.","middleware" => ['auth', 'r
 //        Route::match(['get', 'post'],'/add', [App\Http\Controllers\Admin\NewsController::class, 'add'])->name('add');
 //
 //    });
-    Route::resource('news', 'App\Http\Controllers\Admin\NewsController');
+    Route::resources([
+        'news' => App\Http\Controllers\Admin\NewsController::class,
+        'users' => App\Http\Controllers\Admin\UserController::class,
+    ]);
 
+    Route::get('/parser', [App\Http\Controllers\Admin\ParserController::class, 'index'])->name('parser.index');
     Route::get('/', [App\Http\Controllers\Admin\IndexController::class, 'index'])->name('index');
 });
 

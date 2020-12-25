@@ -1,11 +1,10 @@
 @extends('layouts.app')
 
-@section('title')Информация@endsection
+@section('title')Главная@endsection
 
 @section('content')
     <h1>Главная</h1>
-    <example-component></example-component>
-    <img src="{{ asset('storage/NlTnndAuUWxPzJ5mDCE9gjZTmfctaN73VwxdvUEO.jpeg') }}" alt="">
+    {{ dd('ok') }}
 @endsection
 
 

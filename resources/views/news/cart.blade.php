@@ -5,7 +5,7 @@
     <h3 class="card-header">{{ $item->title }}</h3>
     <div class="card-body">
         <p class="card-text">{{ $item->spoiler }}</p>
-        @if(isset($isAdmin))
+        @if(Auth::user()->hasRole('admin'))
             <a href="{{ route('admin.news.edit', $item->id) }}" class="btn btn-warning">Редактировать</a>
 
             <form class="btn" action="{{ route('admin.news.destroy', $item->id) }}" method="POST">
