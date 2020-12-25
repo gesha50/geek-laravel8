@@ -2,23 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\News;
 
 class NewsController extends Controller
 {
-    //
+
     public function index () {
-        $news = News::getNews();
         return view('news',[
-            'news' => $news
+            'news' => News::where('is_private', 0)->paginate(4),
+            'newsCategory' => CATEGORY::all()
         ]);
     }
 
     public function oneNews ($id) {
-        $oneNews = News::getNews();
+        $oneNews = News::where('id', $id)->first();
+        if (empty($oneNews)) {
+            abort(404);
+        }
         return view('oneNews',[
-            'oneNews' => $oneNews[$id]
+            'oneNews' => $oneNews,
+            'newsCategory' => CATEGORY::all()
         ]);
     }
 }

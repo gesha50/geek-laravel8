@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use Database\Seeders\CategoriesSeeder;
+use Database\Seeders\NewsSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,6 +15,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call([
+            NewsSeeder::class,
+            CategoriesSeeder::class,
+            RoleSeeder::class,
+            ResourcesSeeder::class
+        ]);
         // \App\Models\User::factory(10)->create();
     }
 }

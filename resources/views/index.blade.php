@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('title')Информация@endsection
+@section('title')Главная@endsection
 
 @section('content')
     <h1>Главная</h1>
-    <example-component></example-component>
+    {{ dd('ok') }}
 @endsection
 
 

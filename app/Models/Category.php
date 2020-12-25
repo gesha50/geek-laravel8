@@ -2,21 +2,33 @@
 
 
 namespace App\Models;
+use DB;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-
-class Category
+class Category extends Model
 {
-    const CATEGORY = [
-        0 => 'Политика',
-        1 => 'Спорт',
-        2 => 'Образование',
-        3 => 'Отдых',
-        4 => 'Пандемия',
+    use HasFactory;
 
-    ];
+    protected $table = 'categories';
+    /**
+     * @var mixed
+     */
+    private $id;
+    /**
+     * @var mixed
+     */
+    private $title;
 
-    public static function getCategory () {
-        return self::CATEGORY;
+    public static function getOneCategory($id) {
+        $news = DB::table('news')
+            ->where('category_id', '=', $id)
+            ->get();
+        return $news;
+    }
+
+    public static function getMaxId () {
+        return DB::table('categories')->max('id');
     }
 
 }

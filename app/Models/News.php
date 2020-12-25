@@ -2,51 +2,23 @@
 
 
 namespace App\Models;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-
-class News
+class News extends Model
 {
-    const NEWS = [
-        [
-            'id' => '0',
-            'category_id' => '2',
-            'title' => 'Новость про образование',
-            'description' => 'очень интересная новость!'
-        ],
-        [
-            'id' => '1',
-            'category_id' => '3',
-            'title' => 'Новость про отдых',
-            'description' => 'очень интересная новость!'
-        ],
-        [
-            'id' => '2',
-            'category_id' => '1',
-            'title' => 'Новость про спорт',
-            'description' => 'очень интересная новость!'
-        ],
-        [
-            'id' => '3',
-            'category_id' => '4',
-            'title' => 'Новость про пандемию',
-            'description' => 'очень интересная новость!'
-        ],
-        [
-            'id' => '4',
-            'category_id' => '0',
-            'title' => 'Новость про политику',
-            'description' => 'очень интересная новость!'
-        ],
-        [
-            'id' => '5',
-            'category_id' => '1',
-            'title' => 'Новость про спорт 2',
-            'description' => 'очень интересная новость!'
-        ],
+    use HasFactory;
+    protected $table = 'news';
+    protected $fillable = [
+        'image',
+        'category_id',
+        'is_private',
+        'title',
+        'spoiler',
+        'description'
     ];
 
-    public static function getNews () {
-        return self::NEWS;
+    public function category () {
+        return $this->belongsTo('App\Models\Category');
     }
-
 }
