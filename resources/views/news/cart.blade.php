@@ -5,16 +5,18 @@
     <h3 class="card-header">{{ $item->title }}</h3>
     <div class="card-body">
         <p class="card-text">{{ $item->spoiler }}</p>
-        @if(Auth::user()->hasRole('admin'))
-            <a href="{{ route('admin.news.edit', $item->id) }}" class="btn btn-warning">Редактировать</a>
+        @guest
+            @if(Auth::user()->hasRole('admin'))
+                <a href="{{ route('admin.news.edit', $item->id) }}" class="btn btn-warning">Редактировать</a>
 
-            <form class="btn" action="{{ route('admin.news.destroy', $item->id) }}" method="POST">
-                @method('DELETE')
-                @csrf
-                <button class="btn btn-danger" type="submit" >x</button>
-            </form>
-        @else
-            <a href="{{ route('news.id', $item) }}" class="btn btn-primary">Читать подробнее...</a>
-        @endif
+                <form class="btn" action="{{ route('admin.news.destroy', $item->id) }}" method="POST">
+                    @method('DELETE')
+                    @csrf
+                    <button class="btn btn-danger" type="submit">x</button>
+                </form>
+            @else
+                <a href="{{ route('news.id', $item) }}" class="btn btn-primary">Читать подробнее...</a>
+            @endif
+        @endguest
     </div>
 </div>

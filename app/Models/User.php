@@ -36,6 +36,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    /**
+     * @var mixed
+     */
+    protected $role;
 
     public function hasRole ($role) {
         $id_role = \DB::table('role')->where('role', $role)->first();

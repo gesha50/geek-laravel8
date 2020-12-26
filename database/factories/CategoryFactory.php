@@ -9,7 +9,7 @@ use App\Models\News;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
-class CategoriesFactory extends Factory
+class CategoryFactory extends Factory
 {
     /**
      * Define the model's default state.

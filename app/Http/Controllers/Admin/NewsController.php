@@ -94,7 +94,6 @@ class NewsController extends Controller
     // В данном случае используется middleware    NewsValidate
     public function update(Request $request, News $news)
     {
-
         $news->update($request->all());
         $request->flash();
         if ($request->hasFile('image')) {
